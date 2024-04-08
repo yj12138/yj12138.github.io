@@ -3,21 +3,47 @@ title: Hexo
 --- 
 
 ## 简介
- [Hexo](https://hexo.io/)! 一个快速搭建博客平台的框架。
+
+ [Hexo](https://hexo.io/)
  [Doc](https://hexo.io/docs/) 
- [GitHub](https://github.com/hexojs/hexo/issues).
+ [GitHub](https://github.com/hexojs/hexo/issues)
 
-## Quick Start
-
-### Create a new post
+### 安装Hexo
 
 ``` bash
-$ hexo new "My New Post"
+$ npm install -g hexo-cli
+# git 推送服务
+$ npm install hexo-deployer-git --save
+```
+
+### 创建工程
+
+``` bash
+$ hexo init "my_blog"
+```
+
+### 配置git仓库
+
+修改_config.yml
+
+``` yaml
+# Deployment
+## Docs: https://hexo.io/docs/one-command-deployment
+deploy:
+  type: git
+  repo: https://github.com/yj12138/yj12138.github.io.git
+  branch: master
+```
+
+### 创建新页面
+
+``` bash
+$ hexo new [layout] "new_page"
 ```
 
 More info: [Writing](https://hexo.io/docs/writing.html)
 
-### Run server
+### 启动服务
 
 ``` bash
 $ hexo server
@@ -25,7 +51,7 @@ $ hexo server
 
 More info: [Server](https://hexo.io/docs/server.html)
 
-### Generate static files
+### 生成静态网站
 
 ``` bash
 $ hexo generate
@@ -33,7 +59,7 @@ $ hexo generate
 
 More info: [Generating](https://hexo.io/docs/generating.html)
 
-### Deploy to remote sites
+### 布署网站
 
 ``` bash
 $ hexo deploy
