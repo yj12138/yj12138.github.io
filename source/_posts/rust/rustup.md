@@ -1,5 +1,7 @@
 ---
 title: Rustup rust安装 版本
+categories: Rust
+tags: command
 ---
 
 ## 安装 rust 版本

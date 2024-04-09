@@ -1,5 +1,7 @@
 ---
 title: 安装 kafka
+categories: Linux
+tags: kafka
 ---
 
 ## 准备工作

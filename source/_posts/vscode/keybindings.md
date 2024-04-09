@@ -1,5 +1,7 @@
 ---
 title: 按键绑定
+categories: VSCode
+tags:
 ---
 
 

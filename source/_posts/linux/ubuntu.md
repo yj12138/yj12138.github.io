@@ -1,5 +1,7 @@
 ---
 title: ubuntu 换源
+categories: Linux
+tags: ubuntu
 ---
 
 1. vmware   安装Ubuntu-Server20.04

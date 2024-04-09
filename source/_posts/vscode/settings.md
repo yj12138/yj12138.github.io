@@ -1,5 +1,7 @@
 ---
 title: 设置
+categories: VSCode
+tags:
 ---
 
 ```json

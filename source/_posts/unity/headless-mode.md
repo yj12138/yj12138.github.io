@@ -1,5 +1,7 @@
 ---
 title: Unity Headless Mode 命令行离屏渲染模型
+categories: Unity
+tags: command
 ---
 
 ## -batchmode：

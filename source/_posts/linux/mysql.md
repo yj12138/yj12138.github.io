@@ -1,5 +1,7 @@
 ---
 title: mysql 数据库
+categories: Linux
+tags: sql
 ---
 
 1. 安装

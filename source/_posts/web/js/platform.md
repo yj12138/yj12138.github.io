@@ -1,5 +1,7 @@
 ---
 title: 获取浏览器平台
+categories: Web
+tags: platform
 ---
 
 ```js

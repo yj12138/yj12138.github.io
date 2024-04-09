@@ -1,5 +1,7 @@
 ---
 title: git常用命令
+catogories: git
+tags: git
 ---
 
 1. 设置远程地址

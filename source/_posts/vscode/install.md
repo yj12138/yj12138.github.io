@@ -1,5 +1,7 @@
 ---
 title: 命令安装插件
+categories: VSCode
+tags:
 ---
 
 ```

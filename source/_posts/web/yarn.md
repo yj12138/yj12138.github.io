@@ -1,5 +1,7 @@
 ---
 title: yarn 包管理器
+categories: Web
+tags: yarn
 ---
 # 
 

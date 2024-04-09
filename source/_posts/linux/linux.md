@@ -1,5 +1,7 @@
 ---
 title: 常用命令
+categories: Linux
+tags: command
 ---
 
 # 创建用户

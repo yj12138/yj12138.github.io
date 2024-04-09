@@ -1,5 +1,7 @@
 ---
 title: 导出所有插件
+categories: VSCode
+tags: 
 ---
 
 ``` bach
