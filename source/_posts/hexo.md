@@ -1,5 +1,7 @@
 ---
 title: Hexo
+categories: Hexo
+tags: hexo
 --- 
 
 ## 简介

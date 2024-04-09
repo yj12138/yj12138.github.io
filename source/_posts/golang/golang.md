@@ -1,5 +1,7 @@
 ---
 title: 编译golang源码
+categories: Golang
+tags: source code
 ---
 
 # linux  golang 源码编译

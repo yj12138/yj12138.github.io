@@ -1,5 +1,7 @@
 ---
 title: ssh 远程登录服务
+categories: Linux
+tags: ssh
 ---
 
 1. 安装

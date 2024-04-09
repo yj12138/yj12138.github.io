@@ -1,5 +1,7 @@
 ---
 title: fx 反射框架
+categories: Golang
+tags: injection
 --- 
 
 ## import

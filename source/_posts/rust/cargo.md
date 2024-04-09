@@ -1,5 +1,7 @@
 ---
 title: Cargo  Rust 构建、包管理器
+categories: Rust 
+tags: command
 ---
 
 ## 创建

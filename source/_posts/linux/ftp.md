@@ -1,5 +1,7 @@
 ---
 title: ftp 文件服务搭建
+categories: Linux
+tags: ftp
 ---
 
 1. 安装 

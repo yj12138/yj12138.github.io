@@ -1,5 +1,7 @@
 ---
 title: miniconda python 环境、包管理工具
+categories: Python
+tags: conda
 ---
 ## 基本信息
     conda info

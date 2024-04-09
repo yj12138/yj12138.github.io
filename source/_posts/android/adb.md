@@ -1,5 +1,7 @@
 ---
 title: adb 教程
+categories: Android
+tags: android
 ---
 
 ## devices 

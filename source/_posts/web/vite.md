@@ -1,5 +1,7 @@
 ---
 title: Vite 构建工具
+categories: Web
+tags: vite
 ---
 
 ## 创建项目
