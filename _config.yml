@@ -97,7 +97,9 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 # theme: landscape
-theme: hexo-theme-paperbox
+# theme: hipaper
+theme: light
+
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
