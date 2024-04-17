@@ -4,7 +4,7 @@ categories: Android
 tags: android
 ---
 
-## devices 
+## 查看设备 
 <!-- 显示 设备  -->
 adb devices
 <!-- 断开设备连接 -->
@@ -28,7 +28,7 @@ aapt dump badging test.apk
 adb shell ps
 adb shell "ps | grep 包名"
 
-## 日志
+## 查看日志
 adb logcat
 <!-- 所有进程 -->
 adb logcat -v process
@@ -49,9 +49,9 @@ adb logcat -v time > G:\log.txt
 
 adb logcat WifiHW:D *:S*
 
+adb logcat -v time | findstr com.DefaultCompany.OpenIM > G:\log.txt
 
-<!-- 参考链接 -->
+## 参数链接
+
 <https://blog.csdn.net/pony12/article/details/121538834>
 
-
-adb logcat -v time | findstr com.DefaultCompany.OpenIM > G:\log.txt
