@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>Unity Headless Mode 命令行离屏渲染模型 | Yejian&#39;s Blog</title>
+  <meta name="author" content="YeJian">
+  
+  <meta name="description" content="-batchmode：这个参数将 Unity 设置为批处理模式。在批处理模式下，Unity 不会显示图形用户界面，这对于无人值守的构建和自动化任务很有用。当你使用 -batchmode 时，Unity 将在不启动图形用户界面的情况下执行所需的任务，例如构建、导出场景等。示例命令：YourApp.ex">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Unity Headless Mode 命令行离屏渲染模型"/>
+  <meta property="og:site_name" content="Yejian&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+  
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Yejian&#39;s Blog</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-unity/headless-mode" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2024-04-08T05:48:36.160Z"><a href="/2024/04/08/unity/headless-mode/">2024-04-08</a></time>
+      
+      
+  
+    <h1 class="p-name title" itemprop="headline name">Unity Headless Mode 命令行离屏渲染模型</h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <h2 id="batchmode："><a href="#batchmode：" class="headerlink" title="-batchmode："></a>-batchmode：</h2><p>这个参数将 Unity 设置为批处理模式。在批处理模式下，Unity 不会显示图形用户界面，这对于无人值守的构建和自动化任务很有用。<br>当你使用 -batchmode 时，Unity 将在不启动图形用户界面的情况下执行所需的任务，例如构建、导出场景等。<br>示例命令：YourApp.exe -batchmode -executeMethod YourScript.YourMethod -quit<br>-executeMethod 参数用于在批处理模式下执行指定的 C# 方法。</p>
+<h2 id="nographics："><a href="#nographics：" class="headerlink" title="-nographics："></a>-nographics：</h2><p>这个参数禁用 Unity 的图形渲染系统。在使用 -nographics 时，Unity 不会尝试初始化和运行图形渲染管道，因此不会创建图形窗口。<br>这对于那些只关心命令行操作而不需要图形界面的场景很有用，比如离屏渲染、自动化测试等。<br>示例命令：YourApp.exe -batchmode -nographics -executeMethod YourScript.YourMethod -quit</p>
+<h2 id="executeMethod-执行选定方法"><a href="#executeMethod-执行选定方法" class="headerlink" title="-executeMethod 执行选定方法"></a>-executeMethod 执行选定方法</h2><h2 id="logFile-path-日志路径"><a href="#logFile-path-日志路径" class="headerlink" title="-logFile path  日志路径"></a>-logFile path  日志路径</h2><h2 id="projectPath-项目打包路径"><a href="#projectPath-项目打包路径" class="headerlink" title="-projectPath  项目打包路径"></a>-projectPath  项目打包路径</h2>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Unity/">Unity</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/command/">command</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/categories/Golang/">Golang</a><small>2</small></li>
+  
+    <li><a href="/categories/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/Linux/">Linux</a><small>7</small></li>
+  
+    <li><a href="/categories/OpenIM/">OpenIM</a><small>2</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>1</small></li>
+  
+    <li><a href="/categories/RTC/">RTC</a><small>1</small></li>
+  
+    <li><a href="/categories/Rust/">Rust</a><small>2</small></li>
+  
+    <li><a href="/categories/Shader/">Shader</a><small>2</small></li>
+  
+    <li><a href="/categories/Unity/">Unity</a><small>1</small></li>
+  
+    <li><a href="/categories/VSCode/">VSCode</a><small>4</small></li>
+  
+    <li><a href="/categories/Web/">Web</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/C/">C#</a><small>2</small></li>
+  
+    <li><a href="/tags/android/">android</a><small>1</small></li>
+  
+    <li><a href="/tags/command/">command</a><small>4</small></li>
+  
+    <li><a href="/tags/conda/">conda</a><small>1</small></li>
+  
+    <li><a href="/tags/ftp/">ftp</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/injection/">injection</a><small>1</small></li>
+  
+    <li><a href="/tags/kafka/">kafka</a><small>1</small></li>
+  
+    <li><a href="/tags/platform/">platform</a><small>1</small></li>
+  
+    <li><a href="/tags/react/">react</a><small>1</small></li>
+  
+    <li><a href="/tags/redis/">redis</a><small>1</small></li>
+  
+    <li><a href="/tags/shader/">shader</a><small>2</small></li>
+  
+    <li><a href="/tags/source-code/">source code</a><small>1</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/ubuntu/">ubuntu</a><small>1</small></li>
+  
+    <li><a href="/tags/unity/">unity</a><small>3</small></li>
+  
+    <li><a href="/tags/vite/">vite</a><small>1</small></li>
+  
+    <li><a href="/tags/yarn/">yarn</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget widget-archives">
+    <h3 class="title">归档</h3>
+    <div class="entry">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2024 YeJian
+  
+</div>
+<div class="clearfix"></div></footer>
+  
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+<script src="/js/gallery.js"></script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script>
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
