@@ -47,34 +47,38 @@
 </header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
-  <article id="post-golang/injection/fx" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-linux/kafka" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time class="dt-published" datetime="2024-04-08T05:40:38.304Z"><a href="/2024/04/08/golang/injection/fx/">2024-04-08</a></time>
+        <time class="dt-published" datetime="2024-10-31T08:43:37.889Z"><a href="/2024/10/31/linux/kafka/">2024-10-31</a></time>
       
       
   
-    <h1 class="title"><a href="/2024/04/08/golang/injection/fx/">fx 反射框架</a></h1>
+    <h1 class="title"><a href="/2024/10/31/linux/kafka/">安装 kafka</a></h1>
   
 
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <h2 id="import"><a href="#import" class="headerlink" title="import"></a>import</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;go.uber.org/fx&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="create-options"><a href="#create-options" class="headerlink" title="create options"></a>create options</h2><h3 id="fx-Provide"><a href="#fx-Provide" class="headerlink" title="fx.Provide()"></a>fx.Provide()</h3><p>注册对象构造函数，以便在使用时创建对象引用加入到容器</p>
-<h3 id="fx-Populate"><a href="#fx-Populate" class="headerlink" title="fx.Populate()"></a>fx.Populate()</h3><p>解引用，取出容器中的值</p>
-<h3 id="fx-Invoke"><a href="#fx-Invoke" class="headerlink" title="fx.Invoke()"></a>fx.Invoke()</h3><p>注册在启动之前调用的函数</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">options = <span class="built_in">append</span>(options,</span><br><span class="line">    fx.NopLogger,</span><br><span class="line">	    fx.Provide(</span><br><span class="line">	    log.NewLogger,</span><br><span class="line">	),</span><br><span class="line">	fx.Populate(&amp;dal.DB),</span><br><span class="line">	fx.Populate(&amp;eventBus),</span><br><span class="line">	fx.Invoke(</span><br><span class="line">	listener.NewStartListener,</span><br><span class="line">	),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<h2 id="创建App"><a href="#创建App" class="headerlink" title="创建App"></a>创建App</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app := fx.New(options)</span><br></pre></td></tr></table></figure>
-
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> err := app.Start(context.Background()); err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;-app.Done()</span><br></pre></td></tr></table></figure>
+        <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li><p>安装jdk<br> apt-get install openjdk-8-jdk-headless</p>
+</li>
+<li><p>下载zooKeeper<br> url <a target="_blank" rel="noopener" href="http://archive.apache.org/dist/zookeeper/">http://archive.apache.org/dist/zookeeper/</a><br> 选择 3.4.9</p>
+</li>
+<li><p>配置zooKeeper<br> tar -zxvf zookeeper-3.4.10.tar.gz<br> cp zookeeper-3.4.10 &#x2F;usr&#x2F;local&#x2F;zookeeper -r<br> cd &#x2F;usr&#x2F;local&#x2F;zookeeper<br> 添加环境变量<br> export ZOOKEEPER&#x3D;&#x2F;usr&#x2F;local&#x2F;zookeeper<br> export PATH&#x3D;$PATH:$ZOOKEEPER&#x2F;bin<br> source &#x2F;etc&#x2F;profile</p>
+</li>
+<li><p>zookeeper 启动<br> zkServer.sh start<br> zkServer.sh status<br> zkServer.sh stop</p>
+</li>
+</ol>
+<h2 id="下载kafka"><a href="#下载kafka" class="headerlink" title="下载kafka"></a>下载kafka</h2><ol>
+<li>安装<br> wget <a target="_blank" rel="noopener" href="http://mirrors.shuosc.org/apache/kafka/1.0.0/kafka_2.11-1.0.0.tgz">http://mirrors.shuosc.org/apache/kafka/1.0.0/kafka_2.11-1.0.0.tgz</a><br> tar -zxvf kafka_2.11-1.0.0.tgz<br> vim config&#x2F;server.properties</li>
+<li>启动<br> bin&#x2F;kafka-server-start.sh config&#x2F;server.properties <!-- 后台启动 -->
+ kafka-server-start.sh -daemon ..&#x2F;config&#x2F;server.properties</li>
+</ol>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44088559/article/details/108469030">https://blog.csdn.net/weixin_44088559/article/details/108469030</a></p>
 
       
     </div>
@@ -115,7 +119,7 @@
   
     <li><a href="/categories/Linux/">Linux</a><small>7</small></li>
   
-    <li><a href="/categories/OpenIM/">OpenIM</a><small>2</small></li>
+    <li><a href="/categories/OpenIM/">OpenIM</a><small>3</small></li>
   
     <li><a href="/categories/Python/">Python</a><small>1</small></li>
   
@@ -141,6 +145,8 @@
   <ul class="entry">
   
     <li><a href="/tags/C/">C#</a><small>2</small></li>
+  
+    <li><a href="/tags/OpenIM-ArkTS-Golang/">OpenIM ArkTS Golang</a><small>1</small></li>
   
     <li><a href="/tags/android/">android</a><small>1</small></li>
   
@@ -188,7 +194,7 @@
   <div class="widget widget-archives">
     <h3 class="title">归档</h3>
     <div class="entry">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">32</span></li></ul>
     </div>
   </div>
 

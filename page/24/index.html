@@ -47,24 +47,42 @@
 </header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
-  <article id="post-vscode/export_vs_extension" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-linux/mysql" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time class="dt-published" datetime="2024-04-08T05:58:00.593Z"><a href="/2024/04/08/vscode/export_vs_extension/">2024-04-08</a></time>
+        <time class="dt-published" datetime="2024-10-31T08:43:37.891Z"><a href="/2024/10/31/linux/mysql/">2024-10-31</a></time>
       
       
   
-    <h1 class="title"><a href="/2024/04/08/vscode/export_vs_extension/">导出所有插件</a></h1>
+    <h1 class="title"><a href="/2024/10/31/linux/mysql/">mysql 数据库</a></h1>
   
 
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">for /F %%i in (&#x27;code --list-extensions&#x27;) do @echo code --install-extension %%i &gt;&gt; install.bat</span><br><span class="line">echo succeed</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
-
+        <ol>
+<li><p>安装<br> apt-get install mysql-server</p>
+<p> 默认mysql root 没有密码可是直接使用 root 帐户</p>
+</li>
+<li><p>登录<br> mysql -u root -p</p>
+<p> 允许用户远程登录<br> mysql&gt;GRANT ALL PRIVILEGES ON <em>.</em> TO username@”%” IDENTIFIED BY “password”; </p>
+</li>
+<li><p>创建用户<br> mysql&gt;create user ‘username‘@’localhost’ identified by ‘password’;</p>
+</li>
+<li><p>权限<br> mysql&gt;grant select,insert on <em>.</em> to ‘username‘@’localhost’ iDENTIFIED by ‘password’;</p>
+ <!-- 所有权限 -->
+<p> mysql&gt;grant ALL PRIVILEGES on <em>.</em> to ‘username‘@’localhost’ identified by ‘password’;</p>
+ <!-- 远程 -->
+<p> mysql&gt;grant select,insert on <em>.</em> to ‘username‘@’%’ identified by ‘password’;</p>
+</li>
+<li><p>查看用户<br> select * from</p>
+</li>
+</ol>
+<h1 id="参数链接"><a href="#参数链接" class="headerlink" title="参数链接"></a>参数链接</h1><pre><code>https://blog.csdn.net/qq_42931693/article/details/123819958
+</code></pre>
 
       
     </div>
@@ -105,7 +123,7 @@
   
     <li><a href="/categories/Linux/">Linux</a><small>7</small></li>
   
-    <li><a href="/categories/OpenIM/">OpenIM</a><small>2</small></li>
+    <li><a href="/categories/OpenIM/">OpenIM</a><small>3</small></li>
   
     <li><a href="/categories/Python/">Python</a><small>1</small></li>
   
@@ -131,6 +149,8 @@
   <ul class="entry">
   
     <li><a href="/tags/C/">C#</a><small>2</small></li>
+  
+    <li><a href="/tags/OpenIM-ArkTS-Golang/">OpenIM ArkTS Golang</a><small>1</small></li>
   
     <li><a href="/tags/android/">android</a><small>1</small></li>
   
@@ -178,7 +198,7 @@
   <div class="widget widget-archives">
     <h3 class="title">归档</h3>
     <div class="entry">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">32</span></li></ul>
     </div>
   </div>
 

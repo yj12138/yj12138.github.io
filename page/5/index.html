@@ -47,37 +47,23 @@
 </header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
-  <article id="post-linux/ssh" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-图形学/shader/圆形范围圈" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time class="dt-published" datetime="2024-04-08T05:59:13.533Z"><a href="/2024/04/08/linux/ssh/">2024-04-08</a></time>
+        <time class="dt-published" datetime="2024-10-31T08:43:37.899Z"><a href="/2024/10/31/%E5%9B%BE%E5%BD%A2%E5%AD%A6/shader/%E5%9C%86%E5%BD%A2%E8%8C%83%E5%9B%B4%E5%9C%88/">2024-10-31</a></time>
       
       
   
-    <h1 class="title"><a href="/2024/04/08/linux/ssh/">ssh 远程登录服务</a></h1>
+    <h1 class="title"><a href="/2024/10/31/%E5%9B%BE%E5%BD%A2%E5%AD%A6/shader/%E5%9C%86%E5%BD%A2%E8%8C%83%E5%9B%B4%E5%9C%88/">圆形范围圈</a></h1>
   
 
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <ol>
-<li><p>安装<br> apt-get install openssh-server</p>
-</li>
-<li><p>查看状态<br> systemctl status ssh(sshd)</p>
-</li>
-<li><p>启动<br> systemctl start ssh(sshd)<br> &#x2F;etc&#x2F;init.d&#x2F;ssh(sshd) start</p>
-</li>
-<li><p>关闭<br> systemctl stop ssh(sshd)<br> &#x2F;etc&#x2F;init.d&#x2F;ssh(sshd) stop </p>
-</li>
-<li><p>配置<br> &#x2F;etc&#x2F;ssh&#x2F;sshd_config</p>
-</li>
-<li><p>测试连接<br> windows  ssh 用户名@IP   example :  ssh <a href="mailto:&#x79;&#101;&#106;&#105;&#x61;&#110;&#64;&#49;&#55;&#x32;&#x2e;&#x33;&#48;&#46;&#x33;&#57;&#x2e;&#49;&#53;&#x32;">&#x79;&#101;&#106;&#105;&#x61;&#110;&#64;&#49;&#55;&#x32;&#x2e;&#x33;&#48;&#46;&#x33;&#57;&#x2e;&#49;&#53;&#x32;</a></p>
-</li>
-</ol>
-
+        <figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">Shader &quot;Dawn/FlowDottedCircle&quot;</span><br><span class="line">&#123;</span><br><span class="line">    Properties</span><br><span class="line">    &#123;</span><br><span class="line">        _Color(&quot;Color&quot;,color) = (<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)   <span class="comment">// 颜色</span></span><br><span class="line">        _InnerRadius(&quot;InnerRadius&quot;,Range(<span class="number">0</span>,<span class="number">0.5</span>)) = <span class="number">0.4</span>  <span class="comment">//内径</span></span><br><span class="line">        _OuterRadius(&quot;OuterRadius&quot;,Range(<span class="number">0</span>,<span class="number">0.5</span>)) = <span class="number">0.5</span>  <span class="comment">//外径</span></span><br><span class="line">        _Speed(&quot;Speed&quot;,Range(<span class="number">0</span>,<span class="number">1</span>)) = <span class="number">1.0</span>    <span class="comment">// 旋转速度</span></span><br><span class="line">        _DottedNumber(&quot;DottedNumber&quot;,Range(<span class="number">10</span>,<span class="number">100</span>)) = <span class="number">10</span>  <span class="comment">// 线段数</span></span><br><span class="line">    &#125;</span><br><span class="line">    SubShader</span><br><span class="line">    &#123;</span><br><span class="line">        Tags &#123; &quot;RenderType&quot;=&quot;Transparent&quot; &quot;IgnoreProjector&quot; = &quot;True&quot; &quot;PreviewType&quot; = &quot;Plane&quot;&#125;</span><br><span class="line">        LOD <span class="number">200</span></span><br><span class="line">        Cull Off</span><br><span class="line">        Lighting Off</span><br><span class="line">        ZWrite Off</span><br><span class="line">        Blend SrcAlpha OneMinusSrcAlpha</span><br><span class="line">        Pass </span><br><span class="line">        &#123;</span><br><span class="line">            CGPROGRAM</span><br><span class="line">            <span class="meta">#pragma target 2.0</span></span><br><span class="line">            <span class="meta">#pragma vertex vert</span></span><br><span class="line">            <span class="meta">#pragma fragment frag</span></span><br><span class="line">            struct appdata_t &#123;</span><br><span class="line">                float4 vertex : POSITION;</span><br><span class="line">                fixed4 color : COLOR;</span><br><span class="line">                float2 uv     : TEXCOORD0;</span><br><span class="line">            &#125;;</span><br><span class="line">            struct v2f &#123;</span><br><span class="line">                float4 vertex : SV_POSITION;</span><br><span class="line">                float2 uv    : TEXCOORD0;</span><br><span class="line">            &#125;;</span><br><span class="line">            fixed4 _Color;</span><br><span class="line">            <span class="type">float</span> _InnerRadius;</span><br><span class="line">            <span class="type">float</span> _OuterRadius;</span><br><span class="line">            <span class="type">float</span> _Speed;</span><br><span class="line">            <span class="type">float</span> _DottedNumber;</span><br><span class="line">            v2f vert(appdata_t i)</span><br><span class="line">            &#123;</span><br><span class="line">                v2f o;</span><br><span class="line">                o.vertex = UnityObjectToClipPos(i.vertex);</span><br><span class="line">                o.uv = i.uv;</span><br><span class="line">                <span class="keyword">return</span> o;</span><br><span class="line">            &#125;</span><br><span class="line">            fixed4 frag(v2f i) : SV_TARGET</span><br><span class="line">            &#123;</span><br><span class="line">                fixed4 color =  _Color;</span><br><span class="line">                float2 tempuv = i.uv - float2(<span class="number">0.5</span>,<span class="number">0.5</span>);</span><br><span class="line">                <span class="type">float</span> angle = _Time.y * _Speed;</span><br><span class="line">                float2 rotuv = <span class="number">0</span>;</span><br><span class="line">                rotuv.x = tempuv.x * <span class="built_in">cos</span>(angle) - tempuv.y * <span class="built_in">sin</span>(angle);</span><br><span class="line">                rotuv.y = tempuv.x * <span class="built_in">sin</span>(angle) + tempuv.y * <span class="built_in">cos</span>(angle);</span><br><span class="line">                tempuv = rotuv;</span><br><span class="line">                <span class="type">float</span> dis = <span class="built_in">distance</span>(tempuv,float2(<span class="number">0</span>,<span class="number">0</span>));</span><br><span class="line">                <span class="type">float</span> d = <span class="built_in">step</span>(_InnerRadius,dis) - <span class="built_in">step</span>(_OuterRadius,dis);</span><br><span class="line">                <span class="type">float</span> pi = <span class="number">3.1415926</span>;</span><br><span class="line">                <span class="type">float</span> twopi = pi * <span class="number">2</span>;</span><br><span class="line">                angle = atan2(tempuv.y,tempuv.x) + twopi;</span><br><span class="line">                <span class="type">float</span> angleSpace = <span class="number">2</span> * pi / _DottedNumber;</span><br><span class="line">                <span class="type">float</span> temp = fmod(angle,angleSpace);</span><br><span class="line">                temp = <span class="built_in">step</span>(angleSpace,temp * <span class="number">2</span>);</span><br><span class="line">                <span class="type">float</span> alpha = color.a * d * temp;</span><br><span class="line">                color.a = alpha;</span><br><span class="line">                <span class="keyword">return</span> color;</span><br><span class="line">            &#125;</span><br><span class="line">            ENDCG</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// FallBack &quot;Diffuse&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer>
@@ -117,7 +103,7 @@
   
     <li><a href="/categories/Linux/">Linux</a><small>7</small></li>
   
-    <li><a href="/categories/OpenIM/">OpenIM</a><small>2</small></li>
+    <li><a href="/categories/OpenIM/">OpenIM</a><small>3</small></li>
   
     <li><a href="/categories/Python/">Python</a><small>1</small></li>
   
@@ -143,6 +129,8 @@
   <ul class="entry">
   
     <li><a href="/tags/C/">C#</a><small>2</small></li>
+  
+    <li><a href="/tags/OpenIM-ArkTS-Golang/">OpenIM ArkTS Golang</a><small>1</small></li>
   
     <li><a href="/tags/android/">android</a><small>1</small></li>
   
@@ -190,7 +178,7 @@
   <div class="widget widget-archives">
     <h3 class="title">归档</h3>
     <div class="entry">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">32</span></li></ul>
     </div>
   </div>
 

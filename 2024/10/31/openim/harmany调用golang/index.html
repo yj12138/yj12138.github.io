@@ -1,0 +1,262 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>鸿蒙调用golang代码 | Yejian&#39;s Blog</title>
+  <meta name="author" content="YeJian">
+  
+  <meta name="description" content="踩坑记录HarmanyOS 调用 Golang 导出的 so
+
+方案 1:直接生成 linux 平台 so(失败)
+方案 2:生成 android 平台 so(成功)
+
+方案 1结论: 鸿蒙 ndk 加载链接 so 会出现 TLS(线程内部存储) 重定位错误
+方案 2用鸿蒙的 clang 编译器直接">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="鸿蒙调用golang代码"/>
+  <meta property="og:site_name" content="Yejian&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+  
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Yejian&#39;s Blog</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-openim/harmany调用golang" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2024-10-31T08:44:04.612Z"><a href="/2024/10/31/openim/harmany%E8%B0%83%E7%94%A8golang/">2024-10-31</a></time>
+      
+      
+  
+    <h1 class="p-name title" itemprop="headline name">鸿蒙调用golang代码</h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <h2 id="踩坑记录"><a href="#踩坑记录" class="headerlink" title="踩坑记录"></a>踩坑记录</h2><p>HarmanyOS 调用 Golang 导出的 so</p>
+<ul>
+<li>方案 1:直接生成 linux 平台 so(失败)</li>
+<li>方案 2:生成 android 平台 so(成功)</li>
+</ul>
+<h2 id="方案-1"><a href="#方案-1" class="headerlink" title="方案 1"></a>方案 1</h2><p>结论: 鸿蒙 ndk 加载链接 so 会出现 TLS(线程内部存储) 重定位错误</p>
+<h2 id="方案-2"><a href="#方案-2" class="headerlink" title="方案 2"></a>方案 2</h2><p>用鸿蒙的 clang 编译器直接是无法生成 android 平台的 so,要修改 go 源码(如下)</p>
+<ol>
+<li>下载安装 go1.22.8</li>
+<li>src&#x2F;runtime&#x2F;cgo&#x2F;cgo.go</li>
+</ol>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#cgo android LDFLAGS: -llog</span><br><span class="line">改为</span><br><span class="line">#cgo android LDFLAGS: -lhilog_ndk.z.so</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>src&#x2F;cgo&#x2F;gcc_android.c</li>
+</ol>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#include &lt;android/log.h&gt;</span><br><span class="line">改为</span><br><span class="line">#include &lt;hilog/log.h&gt;</span><br><span class="line"></span><br><span class="line">android_log_vprint(ANDROID_LOG_FATAL, <span class="string">&quot;runtime/cgo&quot;</span>, format, ap);</span><br><span class="line">改为</span><br><span class="line">OH_LOG_FATAL(LOG_APP, format, ap);</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>&#x2F;src&#x2F;net&#x2F;cgo_resold.go</li>
+</ol>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>生成脚本</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="built_in">set</span> NDK_PATH=D:\OpenHarmonySDK\12\native</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> SO_NAME=libopenimsdk</span><br><span class="line"><span class="built_in">set</span> OUT_PATH=openharmony\</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> CGO_ENABLED=1</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> NM=%NDK_PATH%\llvm\bin\llvm-nm</span><br><span class="line"><span class="built_in">set</span> AR=%NDK_PATH%\llvm\bin\llvm-ar</span><br><span class="line"><span class="built_in">set</span> LD=%NDK_PATH%\llvm\bin\ld.lld</span><br><span class="line"><span class="built_in">set</span> BASE_FLAGS=--sysroot=%NDK_PATH%\sysroot -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -fno-addrsig -Wformat -Werror=format-security  -D__MUSL__ -fPIC -MD -MT -MF</span><br><span class="line"></span><br><span class="line">REM arm64-v8a</span><br><span class="line"><span class="built_in">set</span> GOOS=android</span><br><span class="line"><span class="built_in">set</span> GOARCH=arm64</span><br><span class="line"><span class="built_in">set</span> CXXFLAGS=--target=aarch64-linux-ohos %BASE_FLAGS%</span><br><span class="line"><span class="built_in">set</span> CFLAGS=--target=aarch64-linux-ohos %BASE_FLAGS%</span><br><span class="line"><span class="built_in">set</span> CC=%NDK_PATH%\llvm\bin\clang %CFLAGS% %BASE_FLAGS%</span><br><span class="line"><span class="built_in">set</span> CXX=%NDK_PATH%\llvm\bin\clang++ %CFLAGS% %BASE_FLAGS%</span><br><span class="line"></span><br><span class="line">go build -buildmode=c-shared  -trimpath -ldflags=<span class="string">&quot;-s -w&quot;</span> -o %OUT_PATH%arm64-v8a\%SO_NAME%.so ./</span><br><span class="line"></span><br><span class="line">REM x86_64</span><br><span class="line"><span class="built_in">set</span> GOOS=android</span><br><span class="line"><span class="built_in">set</span> GOARCH=amd64</span><br><span class="line"><span class="built_in">set</span> CXXFLAGS=--target=x86_64-linux-ohos %BASE_FLAGS%</span><br><span class="line"><span class="built_in">set</span> CFLAGS=--target=x86_64-linux-ohos %BASE_FLAGS%</span><br><span class="line"><span class="built_in">set</span> CC=%NDK_PATH%\llvm\bin\clang %CFLAGS% %BASE_FLAGS%</span><br><span class="line"><span class="built_in">set</span> CXX=%NDK_PATH%\llvm\bin\clang++ %CFLAGS% %BASE_FLAGS%</span><br><span class="line">go build  -buildmode=c-shared  -trimpath -ldflags=<span class="string">&quot;-s -w&quot;</span> -o %OUT_PATH%x86_64\%SO_NAME%.so ./</span><br></pre></td></tr></table></figure>
+
+<p>结论：可以直接链接并调用 so 的函数,具体调用过程省略</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/OpenIM/">OpenIM</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/OpenIM-ArkTS-Golang/">OpenIM ArkTS Golang</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/categories/Golang/">Golang</a><small>2</small></li>
+  
+    <li><a href="/categories/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/Linux/">Linux</a><small>7</small></li>
+  
+    <li><a href="/categories/OpenIM/">OpenIM</a><small>3</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>1</small></li>
+  
+    <li><a href="/categories/RTC/">RTC</a><small>1</small></li>
+  
+    <li><a href="/categories/Rust/">Rust</a><small>2</small></li>
+  
+    <li><a href="/categories/Shader/">Shader</a><small>2</small></li>
+  
+    <li><a href="/categories/Unity/">Unity</a><small>1</small></li>
+  
+    <li><a href="/categories/VSCode/">VSCode</a><small>4</small></li>
+  
+    <li><a href="/categories/Web/">Web</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/C/">C#</a><small>2</small></li>
+  
+    <li><a href="/tags/OpenIM-ArkTS-Golang/">OpenIM ArkTS Golang</a><small>1</small></li>
+  
+    <li><a href="/tags/android/">android</a><small>1</small></li>
+  
+    <li><a href="/tags/command/">command</a><small>4</small></li>
+  
+    <li><a href="/tags/conda/">conda</a><small>1</small></li>
+  
+    <li><a href="/tags/ftp/">ftp</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/injection/">injection</a><small>1</small></li>
+  
+    <li><a href="/tags/kafka/">kafka</a><small>1</small></li>
+  
+    <li><a href="/tags/platform/">platform</a><small>1</small></li>
+  
+    <li><a href="/tags/react/">react</a><small>1</small></li>
+  
+    <li><a href="/tags/redis/">redis</a><small>1</small></li>
+  
+    <li><a href="/tags/shader/">shader</a><small>2</small></li>
+  
+    <li><a href="/tags/source-code/">source code</a><small>1</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/ubuntu/">ubuntu</a><small>1</small></li>
+  
+    <li><a href="/tags/unity/">unity</a><small>3</small></li>
+  
+    <li><a href="/tags/vite/">vite</a><small>1</small></li>
+  
+    <li><a href="/tags/yarn/">yarn</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget widget-archives">
+    <h3 class="title">归档</h3>
+    <div class="entry">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">32</span></li></ul>
+    </div>
+  </div>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2024 YeJian
+  
+</div>
+<div class="clearfix"></div></footer>
+  
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+<script src="/js/gallery.js"></script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script>
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

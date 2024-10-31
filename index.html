@@ -47,23 +47,52 @@
 </header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
-  <article id="post-openim/c++" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-openim/harmany调用golang" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time class="dt-published" datetime="2024-04-17T10:17:51.512Z"><a href="/2024/04/17/openim/c++/">2024-04-17</a></time>
+        <time class="dt-published" datetime="2024-10-31T08:44:04.612Z"><a href="/2024/10/31/openim/harmany%E8%B0%83%E7%94%A8golang/">2024-10-31</a></time>
       
       
   
-    <h1 class="title"><a href="/2024/04/17/openim/c++/">OpenIM(SDK) C++ 接口导出</a></h1>
+    <h1 class="title"><a href="/2024/10/31/openim/harmany%E8%B0%83%E7%94%A8golang/">鸿蒙调用golang代码</a></h1>
   
 
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <h1 id="基于开源项目openim-sdk-core-的C-接口导出openim-sdk-cpp"><a href="#基于开源项目openim-sdk-core-的C-接口导出openim-sdk-cpp" class="headerlink" title="基于开源项目openim-sdk-core 的C++接口导出openim-sdk-cpp"></a>基于开源项目<a target="_blank" rel="noopener" href="https://github.com/openimsdk/openim-sdk-core">openim-sdk-core</a> 的C++接口导出<a target="_blank" rel="noopener" href="https://github.com/yj12138/openim-sdk-cpp">openim-sdk-cpp</a></h1>
+        <h2 id="踩坑记录"><a href="#踩坑记录" class="headerlink" title="踩坑记录"></a>踩坑记录</h2><p>HarmanyOS 调用 Golang 导出的 so</p>
+<ul>
+<li>方案 1:直接生成 linux 平台 so(失败)</li>
+<li>方案 2:生成 android 平台 so(成功)</li>
+</ul>
+<h2 id="方案-1"><a href="#方案-1" class="headerlink" title="方案 1"></a>方案 1</h2><p>结论: 鸿蒙 ndk 加载链接 so 会出现 TLS(线程内部存储) 重定位错误</p>
+<h2 id="方案-2"><a href="#方案-2" class="headerlink" title="方案 2"></a>方案 2</h2><p>用鸿蒙的 clang 编译器直接是无法生成 android 平台的 so,要修改 go 源码(如下)</p>
+<ol>
+<li>下载安装 go1.22.8</li>
+<li>src&#x2F;runtime&#x2F;cgo&#x2F;cgo.go</li>
+</ol>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#cgo android LDFLAGS: -llog</span><br><span class="line">改为</span><br><span class="line">#cgo android LDFLAGS: -lhilog_ndk.z.so</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>src&#x2F;cgo&#x2F;gcc_android.c</li>
+</ol>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#include &lt;android/log.h&gt;</span><br><span class="line">改为</span><br><span class="line">#include &lt;hilog/log.h&gt;</span><br><span class="line"></span><br><span class="line">android_log_vprint(ANDROID_LOG_FATAL, <span class="string">&quot;runtime/cgo&quot;</span>, format, ap);</span><br><span class="line">改为</span><br><span class="line">OH_LOG_FATAL(LOG_APP, format, ap);</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>&#x2F;src&#x2F;net&#x2F;cgo_resold.go</li>
+</ol>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>生成脚本</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="built_in">set</span> NDK_PATH=D:\OpenHarmonySDK\12\native</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> SO_NAME=libopenimsdk</span><br><span class="line"><span class="built_in">set</span> OUT_PATH=openharmony\</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> CGO_ENABLED=1</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> NM=%NDK_PATH%\llvm\bin\llvm-nm</span><br><span class="line"><span class="built_in">set</span> AR=%NDK_PATH%\llvm\bin\llvm-ar</span><br><span class="line"><span class="built_in">set</span> LD=%NDK_PATH%\llvm\bin\ld.lld</span><br><span class="line"><span class="built_in">set</span> BASE_FLAGS=--sysroot=%NDK_PATH%\sysroot -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -fno-addrsig -Wformat -Werror=format-security  -D__MUSL__ -fPIC -MD -MT -MF</span><br><span class="line"></span><br><span class="line">REM arm64-v8a</span><br><span class="line"><span class="built_in">set</span> GOOS=android</span><br><span class="line"><span class="built_in">set</span> GOARCH=arm64</span><br><span class="line"><span class="built_in">set</span> CXXFLAGS=--target=aarch64-linux-ohos %BASE_FLAGS%</span><br><span class="line"><span class="built_in">set</span> CFLAGS=--target=aarch64-linux-ohos %BASE_FLAGS%</span><br><span class="line"><span class="built_in">set</span> CC=%NDK_PATH%\llvm\bin\clang %CFLAGS% %BASE_FLAGS%</span><br><span class="line"><span class="built_in">set</span> CXX=%NDK_PATH%\llvm\bin\clang++ %CFLAGS% %BASE_FLAGS%</span><br><span class="line"></span><br><span class="line">go build -buildmode=c-shared  -trimpath -ldflags=<span class="string">&quot;-s -w&quot;</span> -o %OUT_PATH%arm64-v8a\%SO_NAME%.so ./</span><br><span class="line"></span><br><span class="line">REM x86_64</span><br><span class="line"><span class="built_in">set</span> GOOS=android</span><br><span class="line"><span class="built_in">set</span> GOARCH=amd64</span><br><span class="line"><span class="built_in">set</span> CXXFLAGS=--target=x86_64-linux-ohos %BASE_FLAGS%</span><br><span class="line"><span class="built_in">set</span> CFLAGS=--target=x86_64-linux-ohos %BASE_FLAGS%</span><br><span class="line"><span class="built_in">set</span> CC=%NDK_PATH%\llvm\bin\clang %CFLAGS% %BASE_FLAGS%</span><br><span class="line"><span class="built_in">set</span> CXX=%NDK_PATH%\llvm\bin\clang++ %CFLAGS% %BASE_FLAGS%</span><br><span class="line">go build  -buildmode=c-shared  -trimpath -ldflags=<span class="string">&quot;-s -w&quot;</span> -o %OUT_PATH%x86_64\%SO_NAME%.so ./</span><br></pre></td></tr></table></figure>
+
+<p>结论：可以直接链接并调用 so 的函数,具体调用过程省略</p>
+
       
     </div>
     <footer>
@@ -101,7 +130,7 @@
   
     <li><a href="/categories/Linux/">Linux</a><small>7</small></li>
   
-    <li><a href="/categories/OpenIM/">OpenIM</a><small>2</small></li>
+    <li><a href="/categories/OpenIM/">OpenIM</a><small>3</small></li>
   
     <li><a href="/categories/Python/">Python</a><small>1</small></li>
   
@@ -127,6 +156,8 @@
   <ul class="entry">
   
     <li><a href="/tags/C/">C#</a><small>2</small></li>
+  
+    <li><a href="/tags/OpenIM-ArkTS-Golang/">OpenIM ArkTS Golang</a><small>1</small></li>
   
     <li><a href="/tags/android/">android</a><small>1</small></li>
   
@@ -174,7 +205,7 @@
   <div class="widget widget-archives">
     <h3 class="title">归档</h3>
     <div class="entry">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">32</span></li></ul>
     </div>
   </div>
 

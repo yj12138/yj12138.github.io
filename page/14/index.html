@@ -47,49 +47,24 @@
 </header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
-  <article id="post-android/adb" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-unitywebrtc/install" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time class="dt-published" datetime="2024-04-08T05:59:13.528Z"><a href="/2024/04/08/android/adb/">2024-04-08</a></time>
+        <time class="dt-published" datetime="2024-10-31T08:43:37.896Z"><a href="/2024/10/31/unitywebrtc/install/">2024-10-31</a></time>
       
       
   
-    <h1 class="title"><a href="/2024/04/08/android/adb/">adb 教程</a></h1>
+    <h1 class="title"><a href="/2024/10/31/unitywebrtc/install/">Install Unity WebRTC</a></h1>
   
 
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <h2 id="查看设备"><a href="#查看设备" class="headerlink" title="查看设备"></a>查看设备</h2><!-- 显示 设备  -->
-<p>adb devices</p>
-<!-- 断开设备连接 -->
-<p>adb kill-server</p>
-<h2 id="安装apk"><a href="#安装apk" class="headerlink" title="安装apk"></a>安装apk</h2><!-- adb install <apk path> -->
-<p>adb install G:&#x2F;test.apk<br>adb uninstall apk包名</p>
-<h2 id="显示包信息"><a href="#显示包信息" class="headerlink" title="显示包信息"></a>显示包信息</h2><!--  打开 shell  终端-->
-<p>adb shell </p>
-<!-- 显示 安装包名 -->
-<p>adb shell pm list package -f </p>
-<h2 id="查看apk信息"><a href="#查看apk信息" class="headerlink" title="查看apk信息"></a>查看apk信息</h2><!-- android sdk -> build tools -->
-<p>aapt dump badging test.apk</p>
-<h2 id="查看进程"><a href="#查看进程" class="headerlink" title="查看进程"></a>查看进程</h2><p>adb shell ps<br>adb shell “ps | grep 包名”</p>
-<h2 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h2><p>adb logcat</p>
-<!-- 所有进程 -->
-<p>adb logcat -v process</p>
-<!-- 过滤进程 -->
-<p>adb logcat -v process | grep ***</p>
-<!--清除日志缓存 -->
-<p>adb logcat  -c</p>
-<!-- 保存日志 -->
-<p>adb logcat -v time &gt; G:\log.txt</p>
-<!-- log level -->
-<p>– <em>V</em> : Verbose (明细);<br>– <em>D</em> : Debug (调试);<br>– <em>I</em> : Info (信息);<br>– <em>W</em> : Warn (警告);<br>– <em>E</em> : Error (错误);<br>– <em>F</em> : Fatal (严重错误);<br>– <em>S</em> : Silent(Super all output) (最高的优先级, 可能不会记载东西);</p>
-<p>adb logcat WifiHW:D <em>:S</em></p>
-<p>adb logcat -v time | findstr com.DefaultCompany.OpenIM &gt; G:\log.txt</p>
-<h2 id="参数链接"><a href="#参数链接" class="headerlink" title="参数链接"></a>参数链接</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/pony12/article/details/121538834">https://blog.csdn.net/pony12/article/details/121538834</a></p>
+        <h2 id="Add-Package-from-gitRUL"><a href="#Add-Package-from-gitRUL" class="headerlink" title="Add Package from gitRUL"></a>Add Package from gitRUL</h2><p><a href="mailto:&#x63;&#111;&#x6d;&#46;&#117;&#x6e;&#x69;&#116;&#x79;&#x2e;&#x77;&#101;&#98;&#114;&#116;&#99;&#64;&#x33;&#46;&#48;&#46;&#48;&#x2d;&#112;&#x72;&#x65;&#46;&#x36;">&#x63;&#111;&#x6d;&#46;&#117;&#x6e;&#x69;&#116;&#x79;&#x2e;&#x77;&#101;&#98;&#114;&#116;&#99;&#64;&#x33;&#46;&#48;&#46;&#48;&#x2d;&#112;&#x72;&#x65;&#46;&#x36;</a></p>
+<h2 id="Link"><a href="#Link" class="headerlink" title="Link"></a>Link</h2><p>Unity Link [<a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.webrtc@3.0/manual/install.html]">https://docs.unity3d.com/Packages/com.unity.webrtc@3.0/manual/install.html]</a></p>
 
       
     </div>
@@ -130,7 +105,7 @@
   
     <li><a href="/categories/Linux/">Linux</a><small>7</small></li>
   
-    <li><a href="/categories/OpenIM/">OpenIM</a><small>2</small></li>
+    <li><a href="/categories/OpenIM/">OpenIM</a><small>3</small></li>
   
     <li><a href="/categories/Python/">Python</a><small>1</small></li>
   
@@ -156,6 +131,8 @@
   <ul class="entry">
   
     <li><a href="/tags/C/">C#</a><small>2</small></li>
+  
+    <li><a href="/tags/OpenIM-ArkTS-Golang/">OpenIM ArkTS Golang</a><small>1</small></li>
   
     <li><a href="/tags/android/">android</a><small>1</small></li>
   
@@ -203,7 +180,7 @@
   <div class="widget widget-archives">
     <h3 class="title">归档</h3>
     <div class="entry">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">32</span></li></ul>
     </div>
   </div>
 

@@ -47,23 +47,37 @@
 </header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
-  <article id="post-vscode/install" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-linux/ssh" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time class="dt-published" datetime="2024-04-08T05:58:00.595Z"><a href="/2024/04/08/vscode/install/">2024-04-08</a></time>
+        <time class="dt-published" datetime="2024-10-31T08:43:37.892Z"><a href="/2024/10/31/linux/ssh/">2024-10-31</a></time>
       
       
   
-    <h1 class="title"><a href="/2024/04/08/vscode/install/">命令安装插件</a></h1>
+    <h1 class="title"><a href="/2024/10/31/linux/ssh/">ssh 远程登录服务</a></h1>
   
 
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">code --install-extension amlovey.shaderlabvscodefree</span><br><span class="line">code --install-extension AntonReshetov.masscode-assistant </span><br><span class="line">code --install-extension bierner.markdown-mermaid </span><br><span class="line">code --install-extension cweijan.vscode-redis-client </span><br><span class="line">code --install-extension Dart-Code.dart-code </span><br><span class="line">code --install-extension Dart-Code.flutter </span><br><span class="line">code --install-extension dtoplak.vscode-glsllint </span><br><span class="line">code --install-extension fernandoescolar.vscode-solution-explorer </span><br><span class="line">code --install-extension golang.go </span><br><span class="line">code --install-extension hediet.vscode-drawio </span><br><span class="line">code --install-extension litefeel.shaderlabformatter </span><br><span class="line">code --install-extension ms-dotnettools.csharp </span><br><span class="line">code --install-extension ms-python.python </span><br><span class="line">code --install-extension ms-vscode-remote.remote-ssh </span><br><span class="line">code --install-extension ms-vscode-remote.remote-ssh-edit </span><br><span class="line">code --install-extension ms-vscode.cmake-tools </span><br><span class="line">code --install-extension ms-vscode.cpptools </span><br><span class="line">code --install-extension slevesque.shader </span><br><span class="line">code --install-extension sumneko.lua </span><br><span class="line">code --install-extension twxs.cmake </span><br><span class="line">code --install-extension vscodevim.vim </span><br><span class="line">code --install-extension xabikos.JavaScriptSnippets </span><br><span class="line">code --install-extension zxh404.vscode-proto3 </span><br></pre></td></tr></table></figure>
+        <ol>
+<li><p>安装<br> apt-get install openssh-server</p>
+</li>
+<li><p>查看状态<br> systemctl status ssh(sshd)</p>
+</li>
+<li><p>启动<br> systemctl start ssh(sshd)<br> &#x2F;etc&#x2F;init.d&#x2F;ssh(sshd) start</p>
+</li>
+<li><p>关闭<br> systemctl stop ssh(sshd)<br> &#x2F;etc&#x2F;init.d&#x2F;ssh(sshd) stop </p>
+</li>
+<li><p>配置<br> &#x2F;etc&#x2F;ssh&#x2F;sshd_config</p>
+</li>
+<li><p>测试连接<br> windows  ssh 用户名@IP   example :  ssh <a href="mailto:&#121;&#x65;&#x6a;&#105;&#x61;&#x6e;&#x40;&#49;&#55;&#x32;&#x2e;&#51;&#x30;&#x2e;&#51;&#x39;&#46;&#49;&#x35;&#x32;">&#121;&#x65;&#x6a;&#105;&#x61;&#x6e;&#x40;&#49;&#55;&#x32;&#x2e;&#51;&#x30;&#x2e;&#51;&#x39;&#46;&#49;&#x35;&#x32;</a></p>
+</li>
+</ol>
+
       
     </div>
     <footer>
@@ -103,7 +117,7 @@
   
     <li><a href="/categories/Linux/">Linux</a><small>7</small></li>
   
-    <li><a href="/categories/OpenIM/">OpenIM</a><small>2</small></li>
+    <li><a href="/categories/OpenIM/">OpenIM</a><small>3</small></li>
   
     <li><a href="/categories/Python/">Python</a><small>1</small></li>
   
@@ -129,6 +143,8 @@
   <ul class="entry">
   
     <li><a href="/tags/C/">C#</a><small>2</small></li>
+  
+    <li><a href="/tags/OpenIM-ArkTS-Golang/">OpenIM ArkTS Golang</a><small>1</small></li>
   
     <li><a href="/tags/android/">android</a><small>1</small></li>
   
@@ -176,7 +192,7 @@
   <div class="widget widget-archives">
     <h3 class="title">归档</h3>
     <div class="entry">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">32</span></li></ul>
     </div>
   </div>
 

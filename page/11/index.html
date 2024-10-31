@@ -47,50 +47,25 @@
 </header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
-  <article id="post-git/git" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-vscode/export_vs_extension" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time class="dt-published" datetime="2024-04-08T05:59:13.530Z"><a href="/2024/04/08/git/git/">2024-04-08</a></time>
+        <time class="dt-published" datetime="2024-10-31T08:43:37.896Z"><a href="/2024/10/31/vscode/export_vs_extension/">2024-10-31</a></time>
       
       
   
-    <h1 class="title"><a href="/2024/04/08/git/git/">git常用命令</a></h1>
+    <h1 class="title"><a href="/2024/10/31/vscode/export_vs_extension/">导出所有插件</a></h1>
   
 
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="查看设置"><a href="#查看设置" class="headerlink" title="查看设置"></a>查看设置</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list</span><br></pre></td></tr></table></figure>
-<h3 id="设置用户邮箱"><a href="#设置用户邮箱" class="headerlink" title="设置用户邮箱"></a>设置用户邮箱</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;xxxx&quot; </span><br><span class="line">git config --global user.email &quot;xxxx&quot;</span><br></pre></td></tr></table></figure>
-
-<h3 id="保存用户凭证"><a href="#保存用户凭证" class="headerlink" title="保存用户凭证"></a>保存用户凭证</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config credential.helper store</span><br></pre></td></tr></table></figure>
-
-<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">当前目录初始化仓库</span></span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">克隆仓库</span></span><br><span class="line">git clone url</span><br></pre></td></tr></table></figure>
-<h2 id="管理"><a href="#管理" class="headerlink" title="管理"></a>管理</h2><!-- git add -->
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add </span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit </span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag </span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch </span><br></pre></td></tr></table></figure>
-
-<h2 id="远程"><a href="#远程" class="headerlink" title="远程"></a>远程</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">设置远程链接</span></span><br><span class="line">git remote add origin url</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">拉取远程分支master并合并到当前分支</span></span><br><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">for /F %%i in (&#x27;code --list-extensions&#x27;) do @echo code --install-extension %%i &gt;&gt; install.bat</span><br><span class="line">echo succeed</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h2><h2 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h2>
       
     </div>
     <footer>
@@ -130,7 +105,7 @@
   
     <li><a href="/categories/Linux/">Linux</a><small>7</small></li>
   
-    <li><a href="/categories/OpenIM/">OpenIM</a><small>2</small></li>
+    <li><a href="/categories/OpenIM/">OpenIM</a><small>3</small></li>
   
     <li><a href="/categories/Python/">Python</a><small>1</small></li>
   
@@ -156,6 +131,8 @@
   <ul class="entry">
   
     <li><a href="/tags/C/">C#</a><small>2</small></li>
+  
+    <li><a href="/tags/OpenIM-ArkTS-Golang/">OpenIM ArkTS Golang</a><small>1</small></li>
   
     <li><a href="/tags/android/">android</a><small>1</small></li>
   
@@ -203,7 +180,7 @@
   <div class="widget widget-archives">
     <h3 class="title">归档</h3>
     <div class="entry">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">32</span></li></ul>
     </div>
   </div>
 

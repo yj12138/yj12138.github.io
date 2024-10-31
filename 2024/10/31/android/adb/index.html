@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  
+  <title>adb 教程 | Yejian&#39;s Blog</title>
+  <meta name="author" content="YeJian">
+  
+  <meta name="description" content="查看设备
+adb devices
+
+adb kill-server
+安装apk
+adb install G:&amp;#x2F;test.apkadb uninstall apk包名
+显示包信息
+adb shell 
+
+adb shell pm list package -f 
+查看apk信息
+aapt d">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="adb 教程"/>
+  <meta property="og:site_name" content="Yejian&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="shortcut icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+  
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Yejian&#39;s Blog</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-android/adb" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2024-10-31T08:43:37.888Z"><a href="/2024/10/31/android/adb/">2024-10-31</a></time>
+      
+      
+  
+    <h1 class="p-name title" itemprop="headline name">adb 教程</h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <h2 id="查看设备"><a href="#查看设备" class="headerlink" title="查看设备"></a>查看设备</h2><!-- 显示 设备  -->
+<p>adb devices</p>
+<!-- 断开设备连接 -->
+<p>adb kill-server</p>
+<h2 id="安装apk"><a href="#安装apk" class="headerlink" title="安装apk"></a>安装apk</h2><!-- adb install <apk path> -->
+<p>adb install G:&#x2F;test.apk<br>adb uninstall apk包名</p>
+<h2 id="显示包信息"><a href="#显示包信息" class="headerlink" title="显示包信息"></a>显示包信息</h2><!--  打开 shell  终端-->
+<p>adb shell </p>
+<!-- 显示 安装包名 -->
+<p>adb shell pm list package -f </p>
+<h2 id="查看apk信息"><a href="#查看apk信息" class="headerlink" title="查看apk信息"></a>查看apk信息</h2><!-- android sdk -> build tools -->
+<p>aapt dump badging test.apk</p>
+<h2 id="查看进程"><a href="#查看进程" class="headerlink" title="查看进程"></a>查看进程</h2><p>adb shell ps<br>adb shell “ps | grep 包名”</p>
+<h2 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h2><p>adb logcat</p>
+<!-- 所有进程 -->
+<p>adb logcat -v process</p>
+<!-- 过滤进程 -->
+<p>adb logcat -v process | grep ***</p>
+<!--清除日志缓存 -->
+<p>adb logcat  -c</p>
+<!-- 保存日志 -->
+<p>adb logcat -v time &gt; G:\log.txt</p>
+<!-- log level -->
+<p>– <em>V</em> : Verbose (明细);<br>– <em>D</em> : Debug (调试);<br>– <em>I</em> : Info (信息);<br>– <em>W</em> : Warn (警告);<br>– <em>E</em> : Error (错误);<br>– <em>F</em> : Fatal (严重错误);<br>– <em>S</em> : Silent(Super all output) (最高的优先级, 可能不会记载东西);</p>
+<p>adb logcat WifiHW:D <em>:S</em></p>
+<p>adb logcat -v time | findstr com.DefaultCompany.OpenIM &gt; G:\log.txt</p>
+<h2 id="参数链接"><a href="#参数链接" class="headerlink" title="参数链接"></a>参数链接</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/pony12/article/details/121538834">https://blog.csdn.net/pony12/article/details/121538834</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Android/">Android</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/android/">android</a>
+  </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/categories/Golang/">Golang</a><small>2</small></li>
+  
+    <li><a href="/categories/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/categories/Linux/">Linux</a><small>7</small></li>
+  
+    <li><a href="/categories/OpenIM/">OpenIM</a><small>3</small></li>
+  
+    <li><a href="/categories/Python/">Python</a><small>1</small></li>
+  
+    <li><a href="/categories/RTC/">RTC</a><small>1</small></li>
+  
+    <li><a href="/categories/Rust/">Rust</a><small>2</small></li>
+  
+    <li><a href="/categories/Shader/">Shader</a><small>2</small></li>
+  
+    <li><a href="/categories/Unity/">Unity</a><small>1</small></li>
+  
+    <li><a href="/categories/VSCode/">VSCode</a><small>4</small></li>
+  
+    <li><a href="/categories/Web/">Web</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/C/">C#</a><small>2</small></li>
+  
+    <li><a href="/tags/OpenIM-ArkTS-Golang/">OpenIM ArkTS Golang</a><small>1</small></li>
+  
+    <li><a href="/tags/android/">android</a><small>1</small></li>
+  
+    <li><a href="/tags/command/">command</a><small>4</small></li>
+  
+    <li><a href="/tags/conda/">conda</a><small>1</small></li>
+  
+    <li><a href="/tags/ftp/">ftp</a><small>1</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/injection/">injection</a><small>1</small></li>
+  
+    <li><a href="/tags/kafka/">kafka</a><small>1</small></li>
+  
+    <li><a href="/tags/platform/">platform</a><small>1</small></li>
+  
+    <li><a href="/tags/react/">react</a><small>1</small></li>
+  
+    <li><a href="/tags/redis/">redis</a><small>1</small></li>
+  
+    <li><a href="/tags/shader/">shader</a><small>2</small></li>
+  
+    <li><a href="/tags/source-code/">source code</a><small>1</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
+  
+    <li><a href="/tags/ssh/">ssh</a><small>1</small></li>
+  
+    <li><a href="/tags/ubuntu/">ubuntu</a><small>1</small></li>
+  
+    <li><a href="/tags/unity/">unity</a><small>3</small></li>
+  
+    <li><a href="/tags/vite/">vite</a><small>1</small></li>
+  
+    <li><a href="/tags/yarn/">yarn</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+  <div class="widget widget-archives">
+    <h3 class="title">归档</h3>
+    <div class="entry">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">32</span></li></ul>
+    </div>
+  </div>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2024 YeJian
+  
+</div>
+<div class="clearfix"></div></footer>
+  
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+<script src="/js/gallery.js"></script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script>
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

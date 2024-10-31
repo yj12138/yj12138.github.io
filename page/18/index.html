@@ -47,23 +47,26 @@
 </header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
-  <article id="post-web/js/platform" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-rust/cargo" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time class="dt-published" datetime="2024-04-08T05:59:09.372Z"><a href="/2024/04/08/web/js/platform/">2024-04-08</a></time>
+        <time class="dt-published" datetime="2024-10-31T08:43:37.894Z"><a href="/2024/10/31/rust/cargo/">2024-10-31</a></time>
       
       
   
-    <h1 class="title"><a href="/2024/04/08/web/js/platform/">获取浏览器平台</a></h1>
+    <h1 class="title"><a href="/2024/10/31/rust/cargo/">Cargo  Rust 构建、包管理器</a></h1>
   
 
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">GetPlatform</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> system = &#123;</span><br><span class="line">    <span class="attr">win</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">mac</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">x11</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">iphone</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">ios</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">ipad</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">android</span>: <span class="literal">false</span>,</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// var platform = navigator.platform</span></span><br><span class="line">  <span class="keyword">var</span> platform = navigator.<span class="property">userAgent</span>.<span class="title function_">toLowerCase</span>()</span><br><span class="line">  system.<span class="property">win</span> = <span class="regexp">/win/i</span>.<span class="title function_">test</span>(platform)</span><br><span class="line">  system.<span class="property">mac</span> = <span class="regexp">/mac/i</span>.<span class="title function_">test</span>(platform)</span><br><span class="line">  system.<span class="property">x11</span> = <span class="regexp">/linux/i</span>.<span class="title function_">test</span>(platform)</span><br><span class="line">  system.<span class="property">iphone</span> = <span class="regexp">/iphone/i</span>.<span class="title function_">test</span>(platform)</span><br><span class="line">  system.<span class="property">ipad</span> = <span class="regexp">/ipad/i</span>.<span class="title function_">test</span>(platform)</span><br><span class="line">  system.<span class="property">ios</span> = <span class="regexp">/ios/i</span>.<span class="title function_">test</span>(platform)</span><br><span class="line">  system.<span class="property">android</span> = <span class="regexp">/android/i</span>.<span class="title function_">test</span>(platform)</span><br><span class="line">  <span class="keyword">return</span> system</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> plat = <span class="title class_">GetPlatform</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">IsPC</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="title class_">IsAndroid</span>() || <span class="title class_">IsIOS</span>()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> plat.<span class="property">win</span> || plat.<span class="property">mac</span> || plat.<span class="property">x11</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">IsAndroid</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> plat.<span class="property">android</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">IsIOS</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> plat.<span class="property">ios</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>1、cargo new project_name</p>
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>cargo run<br>cargo build –release</p>
+<h2 id="显示当前工程使用的包-网页"><a href="#显示当前工程使用的包-网页" class="headerlink" title="显示当前工程使用的包 网页"></a>显示当前工程使用的包 网页</h2><p>cargo doc –open</p>
+
       
     </div>
     <footer>
@@ -103,7 +106,7 @@
   
     <li><a href="/categories/Linux/">Linux</a><small>7</small></li>
   
-    <li><a href="/categories/OpenIM/">OpenIM</a><small>2</small></li>
+    <li><a href="/categories/OpenIM/">OpenIM</a><small>3</small></li>
   
     <li><a href="/categories/Python/">Python</a><small>1</small></li>
   
@@ -129,6 +132,8 @@
   <ul class="entry">
   
     <li><a href="/tags/C/">C#</a><small>2</small></li>
+  
+    <li><a href="/tags/OpenIM-ArkTS-Golang/">OpenIM ArkTS Golang</a><small>1</small></li>
   
     <li><a href="/tags/android/">android</a><small>1</small></li>
   
@@ -176,7 +181,7 @@
   <div class="widget widget-archives">
     <h3 class="title">归档</h3>
     <div class="entry">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">32</span></li></ul>
     </div>
   </div>
 

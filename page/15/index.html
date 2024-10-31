@@ -47,24 +47,25 @@
 </header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
-  <article id="post-web/vite" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-unity/headless-mode" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time class="dt-published" datetime="2024-04-08T05:59:09.378Z"><a href="/2024/04/08/web/vite/">2024-04-08</a></time>
+        <time class="dt-published" datetime="2024-10-31T08:43:37.895Z"><a href="/2024/10/31/unity/headless-mode/">2024-10-31</a></time>
       
       
   
-    <h1 class="title"><a href="/2024/04/08/web/vite/">Vite 构建工具</a></h1>
+    <h1 class="title"><a href="/2024/10/31/unity/headless-mode/">Unity Headless Mode 命令行离屏渲染模型</a></h1>
   
 
     </header>
     <div class="e-content entry" itemprop="articleBody">
       
-        <h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p>yarn create vite<br>yarn create vite my_project_name –template vue(react)</p>
-
+        <h2 id="batchmode："><a href="#batchmode：" class="headerlink" title="-batchmode："></a>-batchmode：</h2><p>这个参数将 Unity 设置为批处理模式。在批处理模式下，Unity 不会显示图形用户界面，这对于无人值守的构建和自动化任务很有用。<br>当你使用 -batchmode 时，Unity 将在不启动图形用户界面的情况下执行所需的任务，例如构建、导出场景等。<br>示例命令：YourApp.exe -batchmode -executeMethod YourScript.YourMethod -quit<br>-executeMethod 参数用于在批处理模式下执行指定的 C# 方法。</p>
+<h2 id="nographics："><a href="#nographics：" class="headerlink" title="-nographics："></a>-nographics：</h2><p>这个参数禁用 Unity 的图形渲染系统。在使用 -nographics 时，Unity 不会尝试初始化和运行图形渲染管道，因此不会创建图形窗口。<br>这对于那些只关心命令行操作而不需要图形界面的场景很有用，比如离屏渲染、自动化测试等。<br>示例命令：YourApp.exe -batchmode -nographics -executeMethod YourScript.YourMethod -quit</p>
+<h2 id="executeMethod-执行选定方法"><a href="#executeMethod-执行选定方法" class="headerlink" title="-executeMethod 执行选定方法"></a>-executeMethod 执行选定方法</h2><h2 id="logFile-path-日志路径"><a href="#logFile-path-日志路径" class="headerlink" title="-logFile path  日志路径"></a>-logFile path  日志路径</h2><h2 id="projectPath-项目打包路径"><a href="#projectPath-项目打包路径" class="headerlink" title="-projectPath  项目打包路径"></a>-projectPath  项目打包路径</h2>
       
     </div>
     <footer>
@@ -104,7 +105,7 @@
   
     <li><a href="/categories/Linux/">Linux</a><small>7</small></li>
   
-    <li><a href="/categories/OpenIM/">OpenIM</a><small>2</small></li>
+    <li><a href="/categories/OpenIM/">OpenIM</a><small>3</small></li>
   
     <li><a href="/categories/Python/">Python</a><small>1</small></li>
   
@@ -130,6 +131,8 @@
   <ul class="entry">
   
     <li><a href="/tags/C/">C#</a><small>2</small></li>
+  
+    <li><a href="/tags/OpenIM-ArkTS-Golang/">OpenIM ArkTS Golang</a><small>1</small></li>
   
     <li><a href="/tags/android/">android</a><small>1</small></li>
   
@@ -177,7 +180,7 @@
   <div class="widget widget-archives">
     <h3 class="title">归档</h3>
     <div class="entry">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a><span class="archive-list-count">30</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a><span class="archive-list-count">32</span></li></ul>
     </div>
   </div>
 
